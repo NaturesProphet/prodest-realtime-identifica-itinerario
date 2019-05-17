@@ -34,10 +34,10 @@ async function main () {
         if ( onibus != undefined && onibus.ROTULO != undefined ) {
 
             let dadosRealTime = await consultaVeiculo( onibus.ROTULO );
-            if ( dadosRealTime != undefined && dadosRealTime.LINHA != undefined ) {
+            if ( dadosRealTime != undefined && dadosRealTime.linha != undefined ) {
                 const veiculo: Veiculo = {
                     IGNICAO: onibus.IGNICAO,
-                    ITINERARIO: dadosRealTime.LINHA,
+                    ITINERARIO: dadosRealTime.linha,
                     ROTULO: onibus.ROTULO,
                     LOCALIZACAO: {
                         HORARIO: onibus.DATAHORA,
@@ -47,8 +47,6 @@ async function main () {
                     }
                 }
                 avisaNoTopico( publishChannel, veiculo );
-            } else {
-                console.log( `Os dados que chegaram do REST são invalidos: ${JSON.stringify( dadosRealTime )}` );
             }
         }
     } );
