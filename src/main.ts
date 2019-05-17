@@ -34,19 +34,22 @@ async function main () {
         if ( onibus != undefined && onibus.ROTULO != undefined ) {
 
             let dadosRealTime = await consultaVeiculo( onibus.ROTULO );
-
-            const veiculo: Veiculo = {
-                IGNICAO: onibus.IGNICAO,
-                ITINERARIO: dadosRealTime.LINHA,
-                ROTULO: onibus.ROTULO,
-                LOCALIZACAO: {
-                    HORARIO: onibus.DATAHORA,
-                    LATITUDE: onibus.LATITUDE,
-                    LONGITUDE: onibus.LONGITUDE,
-                    VELOCIDADE: onibus.VELOCIDADE
+            if ( dadosRealTime != undefined && dadosRealTime.LINHA != undefined ) {
+                const veiculo: Veiculo = {
+                    IGNICAO: onibus.IGNICAO,
+                    ITINERARIO: dadosRealTime.LINHA,
+                    ROTULO: onibus.ROTULO,
+                    LOCALIZACAO: {
+                        HORARIO: onibus.DATAHORA,
+                        LATITUDE: onibus.LATITUDE,
+                        LONGITUDE: onibus.LONGITUDE,
+                        VELOCIDADE: onibus.VELOCIDADE
+                    }
                 }
+                avisaNoTopico( publishChannel, veiculo );
+            } else {
+                console.log( `Os dados que chegaram do REST são invalidos: ${JSON.stringify( dadosRealTime )}` );
             }
-            avisaNoTopico( publishChannel, veiculo );
         }
     } );
 }
