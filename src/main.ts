@@ -37,7 +37,7 @@ async function main () {
             if ( dadosRealTime.length > 0 && dadosRealTime[ 0 ].linha != undefined ) {
                 const veiculo: Veiculo = {
                     IGNICAO: onibus.IGNICAO,
-                    ITINERARIO: dadosRealTime.linha,
+                    ITINERARIO: dadosRealTime[ 0 ].linha,
                     ROTULO: onibus.ROTULO,
                     LOCALIZACAO: {
                         HORARIO: onibus.DATAHORA,
