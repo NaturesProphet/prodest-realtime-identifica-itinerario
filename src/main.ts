@@ -34,7 +34,7 @@ async function main () {
         if ( onibus != undefined && onibus.ROTULO != undefined ) {
 
             let dadosRealTime = await consultaVeiculo( onibus.ROTULO );
-            if ( dadosRealTime != undefined && dadosRealTime.linha != undefined ) {
+            if ( dadosRealTime.length > 0 && dadosRealTime[ 0 ].linha != undefined ) {
                 const veiculo: Veiculo = {
                     IGNICAO: onibus.IGNICAO,
                     ITINERARIO: dadosRealTime.linha,
