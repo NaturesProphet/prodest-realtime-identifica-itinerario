@@ -1,0 +1,1 @@
+export const restUri: string = process.env.URI;
